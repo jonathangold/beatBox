@@ -1,20 +1,40 @@
-var kick = new Howl({
-	src: ['/beatbox/sounds/kick.wav']
+let kick = new Howl({
+	src: ['/sounds/kick.wav']
 })
-var snare = new Howl({
-	src: ['/beatbox/sounds/snare.wav']
+let snare = new Howl({
+	src: ['/sounds/snare.wav']
 })
-var chh = new Howl({
-	src: ['/beatbox/sounds/chh.wav']
+let chh = new Howl({
+	src: ['/sounds/chh.wav']
 })
-var ohh = new Howl({
-	src: ['/beatbox/sounds/ohh.wav']
+let ohh = new Howl({
+	src: ['/sounds/ohh.wav']
 })
-var cymbal = new Howl({
-	src: ['/beatbox/sounds/cymbal.wav']
+let cymbal = new Howl({
+	src: ['/sounds/cymbal.wav']
 })
 
-document.addEventListener('touchstart', function(e){
-	var pad = eval(e.target.id)
-	pad.play()
-})
+function isTouchDevice (){
+	return 'ontouchstart' in document.documentElement
+}
+
+let pads = document.getElementsByTagName('button')
+
+//attach event handlers to buttons
+
+for (i=0;i<pads.length;i++) {
+
+	let pad = pads[i]
+	let sound = eval(pad.id)
+	
+	if (isTouchDevice()){
+		pad.addEventListener('touchstart', function(){
+			sound.play()
+		})
+	}
+	else {
+		pad.addEventListener('click', function(){
+			sound.play()
+		})
+	}
+}
